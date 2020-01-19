@@ -1,0 +1,439 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditworthinessAI</name>
+    </assembly>
+    <members>
+        <member name="T:CreditworthinessAI.Interfaces.IStorage">
+            <summary>
+            Interface to handle file storage
+            </summary>
+        </member>
+        <member name="M:CreditworthinessAI.Interfaces.IStorage.RestoreObject``1(System.String)">
+            <summary>
+            Fetch the object from file
+            </summary>
+            <typeparam name="T">type of restoring object</typeparam>
+            <param name="filepath">path to database</param>
+            <returns></returns>
+        </member>
+        <member name="M:CreditworthinessAI.Interfaces.IStorage.StoreObject(System.Object,System.String)">
+            <summary>
+            Store object in database
+            </summary>
+            <param name="obj">object to store</param>
+            <param name="filepath">path to database</param>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.Account">
+            <summary>
+            Class represents a bank account
+            Expected: 4500 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Account.account_id">
+            <summary>
+            identification number of the account
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Account.district_id">
+            <summary>
+            location of the branch
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Account.date">
+            <summary>
+            date of creating of the account
+            </summary>
+            <remarks>
+            in the form YYMMDD
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Account.frequency">
+            <summary>
+            frequency of issuance of statements
+            </summary>
+            <remarks>
+            Possible values:
+                "POPLATEK MESICNE" stands for monthly issuance
+                "POPLATEK TYDNE" stands for weekly issuance
+                "POPLATEK PO OBRATU" stands for issuance after transaction
+            </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.Client">
+            <summary>
+            Class represents a client of a bank
+            Expected: 5369 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Client.client_id">
+            <summary>
+            client identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Client.birth_number">
+            <summary>
+            birthday and sex
+            </summary>
+            <remarks>
+            the number is in the form YYMMDD for men,
+            the number is in the form YYMM+50DD for women,
+            where YYMMDD is the date of birth
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Client.district_id">
+            <summary>
+            address of the client
+            </summary>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.CreditCard">
+            <summary>
+            Class represent permanent credit card
+            Expected: 892 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.CreditCard.card_id">
+            <summary>
+            card identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.CreditCard.disp_id">
+            <summary>
+            disposition to an account
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.CreditCard.type">
+            <summary>
+            type of card
+            </summary>
+            <remarks>
+            possible values are "junior", "classic", "gold"
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.CreditCard.issued">
+            <summary>
+            issue date
+            </summary>
+            <remarks>
+            in the form YYMMDD
+            </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.Disposition">
+            <summary>
+            Class represents the type of permission that client on account
+            Expected: 5369 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Disposition.disp_id">
+            <summary>
+            Disposition identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Disposition.client_id">
+            <summary>
+            identification number of a client
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Disposition.account_id">
+            <summary>
+            identification number of an account
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Disposition.type">
+            <summary>
+            type of disposition (owner/user)
+            </summary>
+            <remarks>
+            only owner can issue permanent orders and ask for a loan
+            </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.District">
+            <summary>
+            Class represent disctrict
+            Expected: 77 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.district_id">
+            <summary>
+            district identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.district_name">
+            <summary>
+            district name
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.region">
+            <summary>
+            region
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_inhabitants">
+            <summary>
+            no. of inhabitants
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_municipalities_with_inhabitants_less_499">
+            <summary>
+            no. of municipalities with inhabitants less than 499
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_municipalities_with_inhabitants_500_to_1999">
+            <summary>
+            no. of municipalities with inhabitants 500-1999
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_municipalities_with_inhabitants_2000_to_9999">
+            <summary>
+            no. of municipalities with inhabitants 2000-9999
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_municipalities_with_inhabitants_more_10000">
+            <summary>
+            no. of municipalities with inhabitants >10000
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_cities">
+            <summary>
+            no. of cities
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.ratio_of_urban_inhabitants">
+            <summary>
+            ratio of urban inhabitants
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.average_salary">
+            <summary>
+            average salary
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.unemploymant_rate_95">
+            <summary>
+            unemploymant rate '95
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.unemploymant_rate_96">
+            <summary>
+            unemploymant rate '96
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_enterpreneurs_per_1000_inhabitants">
+            <summary>
+            no. of enterpreneurs per 1000 inhabitants
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_commited_crimes_95">
+            <summary>
+            no. of commited crimes '95
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.District.no_of_commited_crimes_96">
+            <summary>
+            no. of commited crimes '96
+            </summary>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.Loan">
+            <summary>
+            Class represent a loan
+            Expected: 682 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.loan_id">
+            <summary>
+            loan identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.account_id">
+            <summary>
+            identification of the account
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.date">
+            <summary>
+            date when the loan was granted
+            </summary>
+            <remarks>
+            in the form YYMMDD
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.amount">
+            <summary>
+            amount of money
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.duration">
+            <summary>
+            duration of the loan
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.payments">
+            <summary>
+            monthly payments
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Loan.status">
+            <summary>
+            status of paying off the loan
+            </summary>
+            <remarks>
+            'A' stands for contract finished, no problems,
+            'B' stands for contract finished, loan not payed,
+            'C' stands for running contract, OK so far,
+            'D' stands for running contract, client in debt
+            </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.PermanentOrder">
+            <summary>
+            Class represent permanent order of transfer
+            Expected: 6471 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.PermanentOrder.order_id">
+            <summary>
+            order identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.PermanentOrder.account_id">
+            <summary>
+            account, the order is issued for
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.PermanentOrder.bank_to">
+            <summary>
+            bank of the recipient
+            </summary>
+            <remarks>
+            each bank has unique two-letter code
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.PermanentOrder.account_to">
+            <summary>
+            account of the recipient
+            </summary>
+            <remarks>
+            MOST OF THEM NOT EXIST IN ACCOUNT DATABASE!!!
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.PermanentOrder.amount">
+            <summary>
+            debited amount
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.PermanentOrder.k_symbol">
+            <summary>
+            characterization of the payment
+            </summary>
+            <remarks>
+            "POJISTNE" stands for insurrance payment
+            "SIPO" stands for household payment
+            "LEASING" stands for leasing
+            "UVER" stands for loan payment
+            </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Objects.Transaction">
+            <summary>
+            Class represent a single transfer
+            Expected: 1056320 objects in Database
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.trans_id">
+            <summary>
+            Transaction identifier
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.account_id">
+            <summary>
+            account, the transation deals with
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.date">
+            <summary>
+            date of transaction
+            </summary>
+            <remarks>
+            in the form YYMMDD
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.type">
+            <summary>
+            credit or withdrawal
+            </summary>
+            <remarks>
+            "PRIJEM" stands for credit
+            "VYDAJ" stands for withdrawal
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.operation">
+            <summary>
+            mode of transaction
+            </summary>
+            <remarks>
+            "VYBER KARTOU" credit card withdrawal
+            "VKLAD" credit in cash
+            "PREVOD Z UCTU" collection from another bank
+            "VYBER" withdrawal in cash
+            "PREVOD NA UCET" remittance to another bank
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.amount">
+            <summary>
+            amount of money
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.balance">
+            <summary>
+            balance after transaction
+            </summary>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.k_symbol">
+            <summary>
+            characterization of the transaction
+            </summary>
+            <remarks>
+            "POJISTNE" stands for insurrance payment
+            "SLUZBY" stands for payment for statement
+            "UROK" stands for interest credited
+            "SANKC. UROK" sanction interest if negative balance
+            "SIPO" stands for household
+            "DUCHOD" stands for old-age pension
+            "UVER" stands for loan payment
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.bank">
+            <summary>
+            bank of the partner
+            </summary>
+            <remarks>
+            each bank has unique two-letter code
+            </remarks>
+        </member>
+        <member name="P:CreditworthinessAI.Objects.Transaction.account">
+            <summary>
+            account of the partner
+            </summary>
+            <remarks>
+            MOST OF THEM NOT EXIST IN ACCOUNT DATABASE!!!
+            </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Storage.JsonStorage">
+            <summary>
+            JSON storage handler
+            </summary>
+        </member>
+        <member name="M:CreditworthinessAI.Storage.JsonStorage.RestoreObject``1(System.String)">
+            <summary>
+            Restore information from JSON database
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filepath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CreditworthinessAI.Storage.JsonStorage.StoreObject(System.Object,System.String)">
+            <summary>
+            Store object in JSON database
+            </summary>
+            <param name="obj"></param>
+            <param name="filepath"></param>
+        </member>
+    </members>
+</doc>
