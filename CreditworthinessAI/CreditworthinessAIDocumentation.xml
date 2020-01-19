@@ -59,6 +59,11 @@
                 "POPLATEK PO OBRATU" stands for issuance after transaction
             </remarks>
         </member>
+        <member name="T:CreditworthinessAI.Objects.AIAccount">
+            <summary>
+            Class represents any necessary information about client to get his Creditworthiness
+            </summary>
+        </member>
         <member name="T:CreditworthinessAI.Objects.Client">
             <summary>
             Class represents a client of a bank
