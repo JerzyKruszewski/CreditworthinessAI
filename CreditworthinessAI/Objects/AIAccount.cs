@@ -19,7 +19,7 @@
 
         public int NumberOfPermanentOrders { get; set; } //from permanent orders
 
-        public int DebitedAmount { get; set; } //from permanent orders
+        public double DebitedAmount { get; set; } //from permanent orders
 
         public int NumberOfCreditTransactions { get; set; } //from transaction
 

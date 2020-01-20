@@ -18,6 +18,7 @@ namespace CreditworthinessAI
         private static readonly IList<Loan> _loans;
         private static readonly IList<PermanentOrder> _orders;
         private static readonly IList<Transaction> _transactions;
+        private static readonly IList<AIAccount> _aiAccounts;
 
         static Program()
         {
@@ -30,23 +31,69 @@ namespace CreditworthinessAI
             _loans = _storage.RestoreObject<List<Loan>>("Resources/loans");
             _orders = _storage.RestoreObject<List<PermanentOrder>>("Resources/orders");
             _transactions = _storage.RestoreObject<List<Transaction>>("Resources/trans");
+            _aiAccounts = new List<AIAccount>();
         }
 
         private static void Main()
         {
-            Console.WriteLine(CheckDataBase());
-            //Console.WriteLine(GetDistrict(1972).district_id);
-            //Console.WriteLine(GetCreditCard(73).card_id);
+            try
+            {
+                if (CheckDataBase())
+                {
+                    int i = 0;
 
-            //foreach (var item in GetAccountPermanentOrders(3))
-            //{
-            //    Console.WriteLine(item.order_id);
-            //}
+                    foreach (Loan loan in _loans)
+                    {
+                        Account account = GetAccounts(loan.account_id).FirstOrDefault();
+                        CreditCard creditCard = GetCreditCards(loan.account_id).FirstOrDefault();
+                        District district = GetDistricts(loan.account_id).FirstOrDefault();
 
-            Console.WriteLine(GetLoan(1801).status);
+                        List<PermanentOrder> orders = GetAccountPermanentOrders(loan.account_id);
+                        List<Transaction> transactions = GetAccountTransactions(loan.account_id);
 
+                        AIAccount aiAccount = new AIAccount()
+                        {
+                            Id = loan.loan_id,
 
-            Console.ReadKey();
+                            FrequencyOfIssuanceOfStatements = GetFrequencyFromAccount(account.account_id),
+
+                            HasCreditCard = IsCreditCardOwner(creditCard),
+
+                            NumberOfInhabitantsInDistrict = district.no_of_inhabitants,
+                            NumberOfCitiesInDistrict = district.no_of_cities,
+                            AverageSalaryInDistrict = district.average_salary,
+
+                            NumberOfPermanentOrders = orders.Count,
+                            DebitedAmount = CalculateDebt(orders),
+
+                            NumberOfCreditTransactions = GetCreditTransactions(transactions),
+                            NumberOfWithdrawalTransactions = GetWithdrawalTransactions(transactions),
+                            ActualAccountBalance = GetBalance(transactions),
+
+                            LoanAmount = loan.amount,
+                            LoanDuration = loan.duration,
+                            LoanMonthlyPayments = loan.payments,
+                            Creditworthiness = HasCreditworthiness(loan)
+                        };
+
+                        _aiAccounts.Add(aiAccount);
+                        i++;
+                        Console.WriteLine(i + "/682");
+                    }
+
+                    foreach (var item in _aiAccounts)
+                    {
+                        Console.WriteLine(item.Creditworthiness);
+                    }
+                }
+
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"{_aiAccounts.Count}\n{ex}");
+                throw;
+            }
         }
 
         private static bool CheckDataBase()
@@ -77,20 +124,64 @@ namespace CreditworthinessAI
             }
         }
 
-        //Unnecessery
-        private static int GetCreditCards()
+        private static bool IsCreditCardOwner(CreditCard creditCard)
         {
-            var result = from a in _accounts
-                         join d in _dispositions
-                         on a.account_id equals d.account_id
-                         join c in _cards
-                         on d.disp_id equals c.disp_id
-                         select c;
+            if (creditCard == null)
+            {
+                return false;
+            }
 
-            return result.Count();
+            return true;
         }
 
-        private static CreditCard GetCreditCard(int holderAccountId)
+        private static double CalculateDebt(List<PermanentOrder> orders)
+        {
+            double sum = 0.0;
+
+            foreach (var item in orders)
+            {
+                sum += item.amount;
+            }
+
+            return sum;
+        }
+
+        private static int GetCreditTransactions(List<Transaction> transactions)
+        {
+            return transactions.Where(x => x.type.ToUpper() == "PRIJEM").ToList().Count;
+        }
+
+        private static int GetWithdrawalTransactions(List<Transaction> transactions)
+        {
+            return transactions.Where(x => x.type.ToUpper() == "VYDAJ").ToList().Count;
+        }
+
+        private static double GetBalance(List<Transaction> transactions)
+        {
+            return Double.Parse(transactions.LastOrDefault().balance);
+        }
+
+        private static bool HasCreditworthiness(Loan loan)
+        {
+            if (loan.status == "A" || loan.status == "C")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private static List<Account> GetAccounts(int accountId)
+        {
+            var result = from l in _loans
+                         join a in _accounts
+                         on accountId equals a.account_id
+                         select a;
+
+            return result.Distinct().ToList();
+        }
+
+        private static List<CreditCard> GetCreditCards(int holderAccountId)
         {
             var result = from a in _accounts
                          join d in _dispositions
@@ -99,10 +190,10 @@ namespace CreditworthinessAI
                          on d.disp_id equals c.disp_id
                          select c;
 
-            return result.FirstOrDefault();
+            return result.Distinct().ToList();
         }
 
-        private static District GetDistrict(int accountId)
+        private static List<District> GetDistricts(int accountId)
         {
             var result = from a in _accounts
                          where a.account_id == accountId
@@ -110,7 +201,7 @@ namespace CreditworthinessAI
                          on a.district_id equals d.district_id
                          select d;
 
-            return result.FirstOrDefault();
+            return result.Distinct().ToList();
         }
 
         private static List<PermanentOrder> GetAccountPermanentOrders(int accountId)
@@ -131,16 +222,6 @@ namespace CreditworthinessAI
                          select t;
 
             return result.Distinct().ToList();
-        }
-
-        private static Loan GetLoan(int accountId)
-        {
-            var result = from a in _accounts
-                         join l in _loans
-                         on accountId equals l.account_id
-                         select l;
-
-            return result.FirstOrDefault();
         }
     }
 }
