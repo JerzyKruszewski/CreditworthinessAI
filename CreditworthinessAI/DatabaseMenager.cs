@@ -107,6 +107,11 @@ namespace CreditworthinessAI
             CsvStorage.StoreObject(database.Skip(478), "Resources/TestData");
         }
 
+        public static List<AIAccount> GetTestAIAccounts()
+        {
+            return RestoreObject<AIAccount>("Resources/TestData");
+        }
+
         private static List<AIAccount> RestoreObject<T>(string filepath)
         {
             using (var reader = new StreamReader($"{filepath}.csv"))

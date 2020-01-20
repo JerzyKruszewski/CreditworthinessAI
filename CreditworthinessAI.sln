@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreditworthinessAI", "CreditworthinessAI\CreditworthinessAI.csproj", "{684B175D-6458-4973-B73D-2F3E3F85C80F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditworthinessAI", "CreditworthinessAI\CreditworthinessAI.csproj", "{684B175D-6458-4973-B73D-2F3E3F85C80F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditworthinessAIML.Model", "CreditworthinessAIML.Model\CreditworthinessAIML.Model.csproj", "{AF68D923-CC8E-4CC3-BF99-3E3CDDD2D336}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditworthinessAIML.ConsoleApp", "CreditworthinessAIML.ConsoleApp\CreditworthinessAIML.ConsoleApp.csproj", "{8246D207-2D22-4FCC-996C-C17502859CB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{684B175D-6458-4973-B73D-2F3E3F85C80F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{684B175D-6458-4973-B73D-2F3E3F85C80F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{684B175D-6458-4973-B73D-2F3E3F85C80F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF68D923-CC8E-4CC3-BF99-3E3CDDD2D336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF68D923-CC8E-4CC3-BF99-3E3CDDD2D336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF68D923-CC8E-4CC3-BF99-3E3CDDD2D336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF68D923-CC8E-4CC3-BF99-3E3CDDD2D336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8246D207-2D22-4FCC-996C-C17502859CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8246D207-2D22-4FCC-996C-C17502859CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8246D207-2D22-4FCC-996C-C17502859CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8246D207-2D22-4FCC-996C-C17502859CB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

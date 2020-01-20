@@ -11,6 +11,8 @@ namespace CreditworthinessAI
                 //Commented cause database already created
                 //DatabaseMenager.CreateDatabase();
                 //DatabaseMenager.SplitDatabase();
+
+                ModelTester.TestModel(DatabaseMenager.GetTestAIAccounts());
             }
             catch (Exception ex)
             {

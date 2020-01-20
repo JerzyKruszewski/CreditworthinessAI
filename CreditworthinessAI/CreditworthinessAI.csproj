@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -12,6 +12,10 @@
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="12.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CreditworthinessAIML.Model\CreditworthinessAIML.Model.csproj" />
   </ItemGroup>
 
 </Project>
