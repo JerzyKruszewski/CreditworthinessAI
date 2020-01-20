@@ -16,7 +16,7 @@ The project aims to create an AI that would predicts creditworthiness based on P
    * Spliting it into two datasets: training (478 rows ~70%) and test (204 rows ~30%)
    * Saving them in .csv files
 1. Running ML.NET Model Builder on training dataset.
-1. Makeing a simple testing algotithm on test dataset.
+1. Making a simple testing algotithm on test dataset.
 
 ## Model Builder Report
 ```
