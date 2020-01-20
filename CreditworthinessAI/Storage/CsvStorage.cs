@@ -11,23 +11,6 @@ namespace CreditworthinessAI.Storage
     public class CsvStorage
     {
         /// <summary>
-        /// Restore information from CSV database
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="filepath"></param>
-        /// <returns></returns>
-        public static IEnumerable<T> RestoreObject<T>(string filepath)
-        {
-            using (var reader = new StreamReader($"{filepath}.csv"))
-            using (var csv = new CsvReader(reader))
-            {
-                var records = csv.GetRecords<T>();
-
-                return records;
-            }
-        }
-
-        /// <summary>
         /// Store object in CSV database
         /// </summary>
         /// <param name="obj"></param>

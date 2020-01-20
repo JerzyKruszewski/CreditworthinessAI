@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using CsvHelper;
 using CreditworthinessAI.Interfaces;
 using CreditworthinessAI.Objects;
 using CreditworthinessAI.Storage;
@@ -92,6 +94,27 @@ namespace CreditworthinessAI
         private static void StoreDatabase()
         {
             CsvStorage.StoreObject(_aiAccounts, "Resources/AiDatabase");
+        }
+
+        /// <summary>
+        /// Splits database in 2 files
+        /// </summary>
+        public static void SplitDatabase()
+        {
+            var database = RestoreObject<AIAccount>("Resources/AiDatabase");
+            Console.WriteLine(database.ToList().Count);
+            CsvStorage.StoreObject(database.Take(478), "Resources/TrainData"); //slightly more than 70%
+            CsvStorage.StoreObject(database.Skip(478), "Resources/TestData");
+        }
+
+        private static List<AIAccount> RestoreObject<T>(string filepath)
+        {
+            using (var reader = new StreamReader($"{filepath}.csv"))
+            using (var csv = new CsvReader(reader))
+            {
+                var records = csv.GetRecords<AIAccount>().ToList();
+                return records;
+            }
         }
 
         private static bool CheckDataBase()

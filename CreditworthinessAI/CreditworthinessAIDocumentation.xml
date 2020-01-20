@@ -14,6 +14,11 @@
             Creates AIAccounts Database
             </summary>
         </member>
+        <member name="M:CreditworthinessAI.DatabaseMenager.SplitDatabase">
+            <summary>
+            Splits database in 2 files
+            </summary>
+        </member>
         <member name="T:CreditworthinessAI.Interfaces.IStorage">
             <summary>
             Interface to handle file storage
@@ -434,14 +439,6 @@
             <summary>
             CSV storage handler
             </summary>
-        </member>
-        <member name="M:CreditworthinessAI.Storage.CsvStorage.RestoreObject``1(System.String)">
-            <summary>
-            Restore information from CSV database
-            </summary>
-            <typeparam name="T"></typeparam>
-            <param name="filepath"></param>
-            <returns></returns>
         </member>
         <member name="M:CreditworthinessAI.Storage.CsvStorage.StoreObject(System.Object,System.String)">
             <summary>

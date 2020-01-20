@@ -8,7 +8,9 @@ namespace CreditworthinessAI
         {
             try
             {
-                DatabaseMenager.CreateDatabase();
+                //Commented cause database already created
+                //DatabaseMenager.CreateDatabase();
+                //DatabaseMenager.SplitDatabase();
             }
             catch (Exception ex)
             {
