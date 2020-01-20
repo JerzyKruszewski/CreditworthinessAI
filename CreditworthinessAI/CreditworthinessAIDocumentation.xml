@@ -4,6 +4,16 @@
         <name>CreditworthinessAI</name>
     </assembly>
     <members>
+        <member name="T:CreditworthinessAI.DatabaseMenager">
+            <summary>
+            Class responsible for databese operations
+            </summary>
+        </member>
+        <member name="M:CreditworthinessAI.DatabaseMenager.CreateDatabase">
+            <summary>
+            Creates AIAccounts Database
+            </summary>
+        </member>
         <member name="T:CreditworthinessAI.Interfaces.IStorage">
             <summary>
             Interface to handle file storage
@@ -419,6 +429,26 @@
             <remarks>
             MOST OF THEM NOT EXIST IN ACCOUNT DATABASE!!!
             </remarks>
+        </member>
+        <member name="T:CreditworthinessAI.Storage.CsvStorage">
+            <summary>
+            CSV storage handler
+            </summary>
+        </member>
+        <member name="M:CreditworthinessAI.Storage.CsvStorage.RestoreObject``1(System.String)">
+            <summary>
+            Restore information from CSV database
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="filepath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CreditworthinessAI.Storage.CsvStorage.StoreObject(System.Object,System.String)">
+            <summary>
+            Store object in CSV database
+            </summary>
+            <param name="obj"></param>
+            <param name="filepath"></param>
         </member>
         <member name="T:CreditworthinessAI.Storage.JsonStorage">
             <summary>
