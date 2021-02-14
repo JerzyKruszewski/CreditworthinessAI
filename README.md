@@ -67,3 +67,6 @@ Accuracy: 0,9313725490196079
 False Positive: 11
 False Negative: 3
 ```
+
+## What I have learned working on this project
+I have learned how to create ML.NET model using ML.NET Model Builder extension and how to consume trained models.
